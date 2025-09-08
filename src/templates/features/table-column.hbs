@@ -1,0 +1,61 @@
+import { Link } from 'react-router-dom';
+import { MenuProps, Dropdown, Button, TableProps } from 'antd';
+import { MoreOutlined, EditOutlined } from '@ant-design/icons';
+import TypographyWrapper from '@components/shared/typography-wrapper';
+import { {{model.name}} } from '@models/{{model.fileName}}';
+
+const getActions = (record: {{model.name}}): MenuProps['items'] => {
+  return [
+    {
+      key: `edit-${record.id}`,
+      label: <Link to={`/{{routeName}}/${record.id}`}>
+        <EditOutlined /> Edit
+      </Link>
+    }
+  ];
+};
+
+const columns: TableProps<{{model.name}}>['columns'] = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+    sorter: true,
+    render: (_, record) => (
+      <TypographyWrapper type="text">
+        {record.id}
+      </TypographyWrapper>
+    )
+  },
+  {{#each features.form.inputs}}
+  {
+    title: '{{title}}',
+    dataIndex: '{{name}}',
+    key: '{{name}}',
+    render: (_, record) => (
+      <TypographyWrapper type="text">
+        {{fieldObject}}
+      </TypographyWrapper>
+    )
+  },
+  {{/each}}
+  {
+    title: 'Action',
+    key: 'action',
+    fixed: 'right',
+    align: 'center',
+    width: 100,
+    render: (_, record) => (
+      <Dropdown
+        key={`action-${record.id}`}
+        menu={{features.tableColumns.actionData}}
+        trigger={['click']}
+        overlayClassName="grid-action"
+      >
+        <Button shape="circle" icon={<MoreOutlined />} />
+      </Dropdown>
+    )
+  }
+];
+
+export { columns };

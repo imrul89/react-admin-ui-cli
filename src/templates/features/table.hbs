@@ -1,0 +1,58 @@
+import { useState } from 'react';
+import { Table, Input, Card } from 'antd';
+import PaginationWrapper from '@components/shared/pagination-wrapper';
+import TableSkeleton from '@components/shared/table-skeleton';
+import { use{{hook.name.getAll}} } from '@hooks/{{hook.fileName}}';
+import useFilter from '@hooks/utility-hooks/use-filter';
+import { columns } from './{{features.tableColumns.fileName}}';
+
+const {{features.table.name}} = () => {
+  const { getQueryParams, setQueryParams, sortTableColumn } = useFilter();
+  const { isLoading, data } = use{{hook.name.getAll}}();
+
+  const [search, setSearch] = useState(getQueryParams().search as string);
+
+  const onSearchHandle = (value: string) => {
+    setQueryParams({
+      ...getQueryParams(),
+      search: value
+    });
+  };
+
+  return (
+    <Card
+      title="{{features.table.title}}"
+      extra={(
+        <div className="my-6">
+          <Input.Search
+            placeholder="Search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onSearch={onSearchHandle}
+            allowClear
+          />
+        </div>
+      )}
+    >
+      {data ?
+        <>
+          <Table
+            columns={columns}
+            dataSource={{features.table.dataSource}}
+            loading={isLoading}
+            pagination={false}
+            onChange={sortTableColumn}
+            rowKey="id"
+            bordered
+          />
+          <div className="flex justify-end mt-4">
+            <PaginationWrapper totalItems={data?.totalNumberOfRows || 0} />
+          </div>
+        </>
+        : <TableSkeleton />
+      }
+    </Card>
+  );
+};
+
+export default {{features.table.name}};

@@ -1,0 +1,22 @@
+import {{features.form.name}}Form from '@features/{{directoryName}}/{{features.form.fileName}}';
+import PageContent from '@layouts/partials/page-content';
+import PageHeader from '@layouts/partials/page-header';
+import { {{model.name}}Partial } from '@models/{{model.fileName}}';
+
+const {{pages.create.name}}Create = () => {
+  const initialValues = {} as {{model.name}}Partial;
+
+  return (
+    <>
+      <PageHeader
+        title="Create {{pages.create.actionTitle}}"
+        subTitle="Fill in the details to create a new {{pages.create.actionTitleLower}}"
+      />
+      <PageContent>
+        <{{features.form.name}}Form initialValues={initialValues} />
+      </PageContent>
+    </>
+  );
+};
+
+export default {{pages.create.name}}Create;

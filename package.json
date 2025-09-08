@@ -1,0 +1,39 @@
+{
+  "name": "react-admin-ui-cli",
+  "version": "1.0.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "package.json",
+    "tsconfig.json",
+    ".npmignore"
+  ],
+  "keywords": ["react", "cli", "admin", "scaffolding", "crud", "typescript"],
+  "author": "Imrul Hasan (Vivasoft Limited)",
+  "license": "ISC",
+  "description": "A custom react CLI tool for quickly scaffolding CRUD modules in projects based on the custom architecture.",
+  "bin": {
+    "rcli": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc && tsc-alias && npm run copy-templates",
+    "copy-templates": "cp -R src/templates dist/templates"
+  },
+  "dependencies": {
+    "@types/handlebars": "^4.1.0",
+    "@types/lodash": "^4.17.6",
+    "handlebars": "^4.7.8",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.8",
+    "@types/pluralize": "^0.0.33",
+    "pluralize": "^8.0.0",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.20.5",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,95 @@
+import { useEffect } from 'react';
+import { Card, Form, Row, Col, Button, {{features.form.formImportInputs}} } from 'antd';
+import { SaveOutlined } from '@ant-design/icons';
+import { use{{hook.name.form}}Form } from '@hooks/{{hook.fileName}}';
+import { useFormValidation } from '@hooks/utility-hooks/use-form-validation';
+import { {{model.name}}, {{model.name}}Partial } from '@models/{{model.fileName}}';
+import { validationMessage } from '@utils/helpers/message-helpers';
+
+interface {{features.form.name}}FormProps {
+  initialValues?: {{model.name}}Partial;
+  isEditMode?: boolean;
+}
+
+const {{features.form.name}}Form = ({
+  initialValues,
+  isEditMode = false
+}: {{features.form.name}}FormProps) => {
+  const [form] = Form.useForm();
+
+  const formTitle = `${isEditMode ? 'Edit ' : 'Create'} {{features.form.title}}`;
+  const formValues = Form.useWatch([], form);
+  const isFormValid = useFormValidation(form, formValues);
+
+  const { onSaved, isLoading } = use{{hook.name.form}}Form();
+
+  useEffect(() => {
+    if (initialValues) {
+      form.setFieldsValue({
+      ...initialValues
+      });
+    }
+  }, [initialValues]);
+
+  const onFinished = (values: {{model.name}}) => {
+    values.id = isEditMode ? initialValues?.id ?? 0 : 0;
+    onSaved(values);
+  };
+
+  return (
+    <Form
+      form={form}
+      layout="vertical"
+      autoComplete="off"
+      initialValues={initialValues}
+      onFinish={onFinished}
+    >
+      <Card title={formTitle}>
+        <Row gutter={24}>
+          {{#each features.form.inputs}}
+          <Col span={12}>
+            <Form.Item
+              label="{{title}}"
+              name="{{name}}"
+              {{#if required}}
+              rules={[
+                { required: true, message: validationMessage('{{title}}') }
+              ]}
+              {{/if}}
+            >
+              {{#if (eq type 'boolean')}}
+              <Switch />
+              {{/if}}
+              {{#if (eq type 'number')}}
+              <Select
+                options={[]}
+                placeholder="Select {{placeholder}}"
+                allowClear
+              />
+              {{/if}}
+              {{#if (eq type 'string')}}
+              <Input placeholder="{{placeholder}}" />
+              {{/if}}
+            </Form.Item>
+          </Col>
+          {{/each}}
+        </Row>
+      </Card>
+      <Row className="my-6">
+        <Col span={24} className="text-right">
+          <Button
+            type="primary"
+            htmlType="submit"
+            icon={<SaveOutlined />}
+            loading={isLoading}
+            disabled={!isFormValid}
+          >
+            Save changes
+          </Button>
+        </Col>
+      </Row>
+    </Form>
+  );
+};
+
+export default {{features.form.name}}Form;

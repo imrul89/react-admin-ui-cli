@@ -1,0 +1,27 @@
+{
+  "moduleName": "Customer",
+  "options": {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "phoneNumber",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "status",
+        "type": "boolean",
+        "required": false
+      }
+    ]
+  }
+}

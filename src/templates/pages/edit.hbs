@@ -1,0 +1,28 @@
+import { useParams } from 'react-router-dom';
+import { Spin } from 'antd';
+import {{features.form.name}}Form from '@features/{{directoryName}}/{{features.form.fileName}}';
+import { use{{hook.name.getOne}} } from '@hooks/{{hook.fileName}}';
+import PageContent from '@layouts/partials/page-content';
+import PageHeader from '@layouts/partials/page-header';
+
+const {{pages.create.name}}Edit = () => {
+  const params = useParams();
+  const {{hook.dataName}}Id = Number(params.id);
+  const { isLoading, {{hook.dataName}} } = use{{hook.name.getOne}}({{hook.dataName}}Id);
+
+  return (
+    <>
+      <PageHeader
+        title="Edit {{pages.create.actionTitle}}"
+        subTitle="Update the {{pages.create.actionTitleLower}} details below"
+      />
+      <PageContent>
+        <Spin spinning={isLoading}>
+          <{{features.form.name}}Form initialValues={ {{hook.dataName}} } isEditMode />
+        </Spin>
+      </PageContent>
+    </>
+  );
+};
+
+export default {{pages.create.name}}Edit;

@@ -1,0 +1,13 @@
+export interface {{model.name}} {
+  id: number;
+  {{#each model.fields}}
+  {{name}}{{#unless required}}?{{/unless}}: {{type}};
+  {{/each}}
+}
+
+export interface {{model.namePlural}} {
+  {{model.dataName}}: {{model.name}}[];
+  totalNumberOfRows: number;
+}
+
+export type {{model.name}}Partial = Partial<{{model.name}}>;

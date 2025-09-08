@@ -1,0 +1,82 @@
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { App } from 'antd';
+import useFilter from '@hooks/utility-hooks/use-filter';
+import { {{model.name}} } from '@models/{{model.fileName}}';
+import { AppError, QueryParams } from '@models/utils-model';
+import {
+  use{{hook.exportName.getAll}}Query,
+  use{{hook.exportName.save}}SavedMutation,
+  use{{hook.exportName.getOne}}Query
+} from '@services/{{service.fileName}}';
+import { formatQueryParams } from '@utils/helpers';
+
+export const use{{hook.name.getAll}} = () => {
+  const location = useLocation();
+
+  const { getQueryParams, setQueryParams, getDefaultQueryParams } = useFilter();
+  const queryParams = getQueryParams();
+
+  const [filterParams, setFilterParams] = useState<QueryParams>({});
+  const [skip, setSkip] = useState<boolean>(true);
+
+  const { isFetching, data: response } = use{{hook.exportName.getAll}}Query(formatQueryParams(filterParams), { skip: skip });
+
+  useEffect(() => {
+    setFilterParams(queryParams);
+  }, [location.search]);
+
+  useEffect(() => {
+    const newQueryParams = {
+      ...filterParams,
+      ...getDefaultQueryParams(),
+    };
+
+    setQueryParams(newQueryParams);
+    setFilterParams(newQueryParams);
+    setSkip(false);
+  }, []);
+
+  const loading = isFetching;
+
+  return {
+    isLoading: loading,
+    data: response
+  };
+};
+
+export const use{{hook.name.form}}Form = () => {
+  const { message } = App.useApp();
+  const navigate = useNavigate();
+
+  const [{{hook.parameters}}Saved, { isLoading, isSuccess, isError, error }] = use{{hook.exportName.save}}SavedMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      message.success('{{moduleName}} saved successfully.');
+      navigate('/{{link}}');
+    }
+
+    if (isError && error) {
+      message.error((error as AppError).data.errors);
+    }
+  }, [isSuccess, isError, error]);
+
+  const onSaved = ({{hook.parameters}}: {{model.name}}) => {
+    {{hook.parameters}}Saved({{hook.parameters}});
+  };
+
+  return {
+    isLoading,
+    onSaved
+  };
+};
+
+export const use{{hook.name.getOne}} = ({{hook.parameters}}Id: number) => {
+  const { isLoading, data: {{hook.parameters}} } = use{{hook.exportName.getOne}}Query({{hook.parameters}}Id);
+
+  return {
+    isLoading,
+    {{hook.parameters}}
+  };
+};

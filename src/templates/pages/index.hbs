@@ -1,0 +1,28 @@
+import { Link } from 'react-router-dom';
+import { Button } from 'antd';
+import { PlusCircleOutlined } from '@ant-design/icons';
+import {{features.table.name}} from '@features/{{directoryName}}/{{features.table.fileName}}';
+import PageContent from '@layouts/partials/page-content';
+import PageHeader from '@layouts/partials/page-header';
+
+const {{pages.index.name}} = () => {
+  return (
+    <>
+      <PageHeader
+        title="{{pages.index.name}}"
+        subTitle="Manage {{pages.index.title}}"
+      >
+        <Link to={'/{{routeName}}/create'}>
+          <Button type={'primary'} icon={<PlusCircleOutlined />}>
+            Create {{pages.index.actionTitle}}
+          </Button>
+        </Link>
+      </PageHeader>
+      <PageContent>
+        <{{features.table.name}} />
+      </PageContent>
+    </>
+  );
+};
+
+export default {{pages.index.name}};
