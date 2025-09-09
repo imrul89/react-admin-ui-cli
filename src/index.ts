@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 
 import * as fs from 'fs';
 import _ from 'lodash';
@@ -16,11 +16,18 @@ import { getDirectoryName } from '@utils/helpers.js';
 import pkg from 'pluralize';
 
 const { singular } = pkg;
-const settings: Module = JSON.parse(fs.readFileSync(`${process.cwd()}/rcli-settings.json`, 'utf8'));
+
+const rcliSettingsFile = path.join(process.cwd(), 'rcli-settings.json');
+const settings: Module = JSON.parse(fs.readFileSync(rcliSettingsFile, 'utf8'));
 
 // Validate CLI arguments
 const validateArguments = (): string => {
-  if (!(process.argv[2] === 'generate' || process.argv[2] === 'g' || process.argv[3] === 'module' || process.argv[3] === 'm')) {
+  if (
+    !(
+      (process.argv[2] === 'generate' || process.argv[2] === 'g') &&
+      (process.argv[3] === 'module' || process.argv[3] === 'm')
+    )
+  ) {
     console.error('❌ Invalid command. Use: rcli generate module <ModuleName> or rcli g m <ModuleName>');
     process.exit(1);
   }
@@ -42,7 +49,7 @@ const validateModule = (moduleName: string, settings: Module): void => {
     process.exit(1);
   }
   
-  const moduleDir = path.join(process.cwd(), 'src/pages', getDirectoryName(moduleName));
+  const moduleDir = path.join(process.cwd(), 'src', 'pages', getDirectoryName(moduleName));
   if (fs.existsSync(moduleDir)) {
     console.error(`❌ The ${moduleName} module already exists.`);
     process.exit(1);

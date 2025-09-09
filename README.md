@@ -1,6 +1,6 @@
 # React CLI
 
-A custom **React CLI tool** for quickly scaffolding CRUD modules in projects based on the [React Admin Skeleton](https://gitea.vivasoftltd.com/Vivasoft/react-admin-skeleton) architecture.
+A custom **React CLI tool** for quickly scaffolding CRUD modules in projects based on the [React Admin Skeleton](https://github.com/imrul89/react-admin-skeleton) architecture.
 
 This CLI helps you save development time by generating boilerplate code (pages, feature components, hooks, services, models, routes) that fits perfectly into the React Admin Skeleton structure.
 
@@ -18,23 +18,26 @@ This CLI helps you save development time by generating boilerplate code (pages, 
 
 ## 📦 Installation
 
-### Global Install
+### Project Installation
+
+```bash
+git clone git@github.com:imrul89/react-admin-skeleton.git
+cd react-admin-skeleton
+
+cp .env.dev.example .env.dev
+// Update .env.dev with your configurations
+
+npm install
+npm run dev
+```
+
+### CLI Installation
 
 ```bash
 npm install -g react-admin-ui-cli
-```
+````
 
-## 🚀 Usage
-### Generate a new CRUD module
-Module name should be in Singular or PascalCase (e.g. User, UserGroup).
-
-```bash
-rcli generate module <ModuleName>
-or
-rcli g m <ModuleName>
-```
-
-Ensure that the `rcli-settings.json` file is present in the root directory of your project.
+After package installation you have to create a `rcli-settings.json` file in the root directory of your project.
 This file contains the necessary configuration for the CLI to generate modules correctly.
 
 ### 🛠 `rcli-settings.json`
@@ -66,6 +69,16 @@ This file contains the necessary configuration for the CLI to generate modules c
     ]
   }
 }
+```
+
+## 🚀 Usage
+### Generate a new CRUD module
+Module name should be in Singular or PascalCase (e.g. User, UserGroup).
+
+```bash
+rcli generate module <ModuleName>
+or
+rcli g m <ModuleName>
 ```
 
 ## Example

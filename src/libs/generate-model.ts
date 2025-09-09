@@ -12,15 +12,15 @@ const __dirname = path.dirname(__filename);
 export const generateModel = (module: Module): boolean => {
   const config = createConfig(module);
   
-  const modelDir = path.join(process.cwd(), 'src/models');
+  const modelDir = path.join(process.cwd(), 'src', 'models');
   const modelFile = path.join(modelDir, `${config.model.fileName}.ts`);
   
   if (fs.existsSync(modelFile)) {
-    console.error(`❌ The ${config.model.name} model already exists.`);
+    console.error(`⚠️ The ${config.model.name} model already exists.`);
     return false;
   }
   
-  const templatePath = path.join(__dirname, '../templates/model.hbs');
+  const templatePath = path.resolve(__dirname, '../templates/model.hbs');
   const templateSource = fs.readFileSync(templatePath, 'utf8');
   const template = handlebars.compile(templateSource);
   

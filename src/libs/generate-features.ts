@@ -16,15 +16,15 @@ export const generateFeatures = (module: Module): boolean => {
   
   const config = createConfig(module);
   
-  const featureDir = path.join(process.cwd() + '/src/features', config.directoryName);
+  const featureDir = path.join(process.cwd(), 'src', 'features', config.directoryName);
   const tableFile = path.join(featureDir, `${config.features.table.fileName}.tsx`);
   
   if (fs.existsSync(tableFile)) {
-    console.error(`❌ The ${config.moduleName} table already exists.`);
+    console.error(`⚠️ The ${config.moduleName} table already exists.`);
     return false;
   }
   
-  const templatePath = path.join(__dirname, '../templates/features/table.hbs');
+  const templatePath = path.resolve(__dirname, '../templates/features/table.hbs');
   const templateSource = fs.readFileSync(templatePath, 'utf8');
   const template = handlebars.compile(templateSource);
   const templateContent = template(config);
@@ -40,7 +40,7 @@ export const generateFeatures = (module: Module): boolean => {
   console.log(`✅ The ${config.moduleName} table has been created successfully.`);
 
   const tableColumnFile = path.join(featureDir, `${config.features.tableColumns.fileName}.tsx`);
-  const tableColumnPath = path.join(__dirname, '../templates/features/table-column.hbs');
+  const tableColumnPath = path.resolve(__dirname, '../templates/features/table-column.hbs');
   const tableColumnSource = fs.readFileSync(tableColumnPath, 'utf8');
   const tableColumn = handlebars.compile(tableColumnSource);
   const tableColumnContent = tableColumn(config);
@@ -50,7 +50,7 @@ export const generateFeatures = (module: Module): boolean => {
   console.log(`✅ The ${config.moduleName} table column has been created successfully.`);
 
   const formFile = path.join(featureDir, `${config.features.form.fileName}.tsx`);
-  const formPath = path.join(__dirname, '../templates/features/form.hbs');
+  const formPath = path.resolve(__dirname, '../templates/features/form.hbs');
   const formSource = fs.readFileSync(formPath, 'utf8');
   const form = handlebars.compile(formSource);
   const formContent = form(config);
