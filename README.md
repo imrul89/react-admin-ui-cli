@@ -36,7 +36,7 @@ A basic auth, user, and customers api deployed on vercel server, so that you can
 
 ```
 Username: admin
-password: 123456
+Password: 123456
 ```
 
 ### CLI Installation

@@ -3,6 +3,7 @@ import fs from 'fs';
 import { Module } from '../models';
 import { createConfig } from '@utils/config.js';
 import path from 'path';
+import * as console from 'node:console';
 
 export const generateRoute = (module: Module): boolean => {
   const config = createConfig(module);
@@ -14,49 +15,40 @@ export const generateRoute = (module: Module): boolean => {
   if (routesContent.includes(`path: '${config.routeName}'`)) {
     console.error(`⚠️ Route ${config.routeName} already exists.`);
   } else {
-    const normalizedRoutesContent = routesContent.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-    const bracketRegex = /\];\s*\};/g;
-    let match, lastRouteBracketIndex = -1;
-    
-    while ((match = bracketRegex.exec(normalizedRoutesContent)) !== null) {
-      lastRouteBracketIndex = match.index;
-    }
-    
-    if (lastRouteBracketIndex === -1) {
-      throw new Error('Could not find routes array closing bracket');
-    }
+    const routeArrayEndIndex = routesContent.lastIndexOf('];');
     
     const newRouteString = `  {
-      path: '${config.routeName}',
-      breadcrumb: '${config.title}',
-      component: '',
-      exact: true,
-      children: [
-        {
-          path: '',
-          breadcrumb: '${config.title}',
-          component: ${config.pages.index.name},
-          exact: true
-        },
-        {
-          path: 'create',
-          breadcrumb: 'Create ${config.pages.create.actionTitle}',
-          component: ${config.pages.create.name}Create,
-          exact: true
-        },
-        {
-          path: ':id',
-          breadcrumb: 'Edit ${config.pages.create.actionTitle}',
-          component: ${config.pages.create.name}Edit,
-          exact: true
-        }
-      ]
-    },`;
+    path: '${config.routeName}',
+    breadcrumb: '${config.title}',
+    component: '',
+    exact: true,
+    children: [
+      {
+        path: '',
+        breadcrumb: '${config.title}',
+        component: ${config.pages.index.name},
+        exact: true
+      },
+      {
+        path: 'create',
+        breadcrumb: 'Create ${config.pages.create.actionTitle}',
+        component: ${config.pages.create.name}Create,
+        exact: true
+      },
+      {
+        path: ':id',
+        breadcrumb: 'Edit ${config.pages.create.actionTitle}',
+        component: ${config.pages.create.name}Edit,
+        exact: true
+      }
+    ]
+  },`;
     
-    const beforeClosing = routesContent.substring(0, lastRouteBracketIndex);
-    const afterClosing = routesContent.substring(lastRouteBracketIndex);
-    
-    let updatedContent = beforeClosing + newRouteString + '\n  ' + afterClosing;
+    let updatedContent =
+      routesContent.substring(0, routeArrayEndIndex) +
+      newRouteString +
+      '\n' +
+      routesContent.substring(routeArrayEndIndex);
     
     const importStatements = `import ${config.pages.index.name} from '@pages/${config.directoryName}';` + '\n' +
       `import ${config.pages.create.name}Create from '@pages/${config.directoryName}/create';` + '\n' +
@@ -87,14 +79,14 @@ export const generateRoute = (module: Module): boolean => {
     icon: <UserOutlined />
   },`;
     
-    const updatedContent =
+    const updatedMenuContent =
       menuContent.substring(0, arrayEndIndex) +
       newMenuString +
       '\n' +
       menuContent.substring(arrayEndIndex);
     
     // Write the updated content back to the file
-    fs.writeFileSync(menuFilePath, updatedContent, 'utf8');
+    fs.writeFileSync(menuFilePath, updatedMenuContent, 'utf8');
     console.log(`✅ Menu item ${config.routeName} added successfully.`);
     
   }
