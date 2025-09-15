@@ -1,26 +1,42 @@
 {
   "name": "react-admin-ui-cli",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "type": "module",
   "main": "dist/index.js",
   "files": [
+    "src",
     "dist",
     "README.md",
     "package.json",
     "tsconfig.json",
     ".npmignore"
   ],
-  "keywords": ["react cli", "react admin cli", "react scaffolding", "react crud", "react crud cli", "react"],
+  "description": "A custom CLI tool for quickly scaffolding CRUD modules for React Admin Skeleton projects.",
+  "keywords": [
+    "react",
+    "cli",
+    "crud",
+    "react-admin-skeleton",
+    "react-admin",
+    "admin",
+    "codegen",
+    "scaffold",
+    "generator",
+    "react crud",
+    "react cli",
+    "vite",
+    "redux-toolkit",
+    "ant-design"
+  ],
   "author": {
     "name": "Md. Imrul Hasan (Vivasoft Limited)",
     "url": "https://github.com/imrul89"
   },
-  "license": "ISC",
-  "description": "A custom react CLI tool for quickly scaffolding CRUD modules in projects based on the custom architecture.",
   "repository": {
     "type": "git",
     "url": "https://github.com/imrul89/react-cli.git"
   },
+  "license": "MIT",
   "bin": {
     "rcli": "./dist/index.js"
   },

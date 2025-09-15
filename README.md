@@ -31,6 +31,14 @@ npm install
 npm run dev
 ```
 
+### Login Credentials
+A basic auth, user, and customers api deployed on vercel server, so that you can test the generated modules right away.
+
+```
+Username: admin
+password: 123456
+```
+
 ### CLI Installation
 
 ```bash
