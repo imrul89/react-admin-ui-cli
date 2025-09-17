@@ -1,18 +1,26 @@
-# React CLI
+<!--
+react cli, react admin cli, react crud generator, react scaffolding, admin panel generator, ant design, redux toolkit, vite
+-->
 
-A custom **React CLI tool** for quickly scaffolding CRUD modules in projects based on the [React Admin Skeleton](https://github.com/imrul89/react-admin-skeleton) architecture.
+# react-admin-ui-cli
 
-This CLI helps you save development time by generating boilerplate code (pages, feature components, hooks, services, models, routes) that fits perfectly into the React Admin Skeleton structure.
+> 🚀 **React CLI** for admin panel scaffolding, CRUD generator, Ant Design, Redux Toolkit, and Vite.
+
+[![npm version](https://img.shields.io/npm/v/react-admin-ui-cli.svg)](https://www.npmjs.com/package/react-admin-ui-cli)
+
+A custom **React CLI tool** for quickly scaffolding CRUD modules of admin panels based on the [React Admin Skeleton](https://github.com/imrul89/react-admin-skeleton) architecture.
+
+This **CLI** helps you save development time by generating boilerplate code (pages, feature components, hooks, services, models, routes) that fits perfectly into the **React Admin** Skeleton structure.
 
 ---
 
 ## ✨ Features
 
-- 🚀 Generate full **CRUD modules** with one command
-- 📂 Auto-create files following the React Admin Skeleton folder structure
-- 🔗 Adds pages, feature components, hooks, services and models automatically
-- ⚡ Compatible with **React 18**, **Redux Toolkit**, **Ant Design**, and **Vite**
-- 🛠 Simple CLI interface
+- **React CLI** generator for admin UIs
+- Generate full **CRUD modules** with one command
+- Auto-create files following the **React Admin** Skeleton folder structure
+- Adds pages, feature components, hooks, services and models automatically
+- Compatible with **React 18**, **Redux Toolkit**, **Ant Design**, and **Vite**
 
 ---
 

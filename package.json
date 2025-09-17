@@ -1,6 +1,6 @@
 {
   "name": "react-admin-ui-cli",
-  "version": "1.0.14",
+  "version": "1.0.17",
   "type": "module",
   "main": "dist/index.js",
   "files": [
@@ -18,15 +18,23 @@
     "crud",
     "react-admin-skeleton",
     "react-admin",
+    "react-admin-cli",
     "admin",
     "codegen",
     "scaffold",
     "generator",
     "react crud",
+    "react admin crud",
     "react cli",
-    "vite",
-    "redux-toolkit",
-    "ant-design"
+    "react-admin generator",
+    "react-admin scaffolding",
+    "react-admin code generator",
+    "react-admin ant-design",
+    "react scaffolding tool",
+    "react admin panel generator",
+    "react admin ui generator",
+    "react cli tool",
+    "react admin cli generator"
   ],
   "author": {
     "name": "Md. Imrul Hasan (Vivasoft Limited)",
@@ -34,7 +42,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/imrul89/react-cli.git"
+    "url": "https://github.com/imrul89/react-admin-ui-cli.git"
   },
   "license": "MIT",
   "bin": {
