@@ -21,7 +21,7 @@ export const {{service.name}} = baseService.injectEndpoints({
     {{service.hooks.save}}Saved: builder.mutation<{{model.name}}, {{model.name}}>({
       query: (requestData) => {
         const requestUrl = API_END_POINTS.{{hook.link}};
-        const requestMethod = requestData?.id ? 'PUT' : 'POST';
+        const requestMethod = requestData?.id ? 'PATCH' : 'POST';
 
         return {
           url: requestUrl,

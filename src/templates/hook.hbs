@@ -54,7 +54,7 @@ export const use{{hook.name.form}}Form = () => {
   useEffect(() => {
     if (isSuccess) {
       message.success('{{moduleName}} saved successfully.');
-      navigate('/{{link}}');
+      navigate('/{{hook.link}}');
     }
 
     if (isError && error) {
